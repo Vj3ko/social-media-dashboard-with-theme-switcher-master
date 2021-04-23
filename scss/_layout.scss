@@ -1,0 +1,357 @@
+// GLOBAL STYLES
+*,
+*::before,
+*::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+}
+
+html {
+      font-size: 62.5%;
+}
+
+body {
+      font-family: "Inter", sans-serif;
+      font-size: 1.6rem;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: var(--clr-bg);
+      position: relative;
+
+      &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30rem;
+            background: var(--clr-top-bg);
+            z-index: -1;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+      }
+}
+
+p {
+      font-size: 1.4rem;
+      color: var(--clr-text-2);
+      font-weight: bold;
+}
+
+.container {
+      width: 90%;
+      max-width: 110rem;
+      margin: auto;
+}
+
+// end of GLOBAL STYLES
+
+//==================
+// HEADER STYLES
+//==================
+.header {
+      margin-top: 4rem;
+
+      @include responsive("phone") {
+            @include flex(space-between, flex-start);
+            margin-bottom: 4rem;
+      }
+
+      &__title {
+            border-bottom: 0.1rem solid var(--clr-text-2);
+            padding-bottom: 2.5rem;
+
+            h1 {
+                  margin-bottom: 1rem;
+                  color: var(--clr-text-1);
+
+                  @include responsive("laptop") {
+                        font-size: 3rem;
+                  }
+            }
+
+            @include responsive("phone") {
+                  border-bottom: none;
+            }
+      }
+
+      &__switch {
+            margin: 2.5rem 0;
+            @include flex(space-between, center);
+
+            @include responsive("phone") {
+                  margin: 0;
+            }
+
+            &:hover label,
+            &:hover button {
+                  color: var(--clr-text-1);
+            }
+
+            label {
+                  font-weight: bold;
+                  color: var(--clr-text-2);
+                  margin-right: 2rem;
+                  cursor: pointer;
+            }
+
+            button {
+                  width: 5rem;
+                  height: 2.8rem;
+                  border-radius: 4rem;
+                  background: linear-gradient(
+                        to right,
+                        var(--clr-toggle-1),
+                        var(--clr-toggle-2)
+                  );
+                  position: relative;
+                  cursor: pointer;
+                  outline: none;
+                  border: none;
+
+                  .round {
+                        height: 2rem;
+                        width: 2rem;
+                        background: var(--clr-bg);
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 50%;
+                        right: 0.1rem;
+                        transform: translateY(-50%);
+                        transition: 200ms linear;
+                  }
+
+                  &.active .round {
+                        right: 3rem;
+                  }
+
+                  &:hover,
+                  &:focus {
+                        outline: auto;
+                  }
+            }
+      }
+}
+
+//==================
+// MAIN STYLES
+//==================
+.main {
+      margin-bottom: 4rem;
+
+      .top {
+            @include responsive("phone") {
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 3rem;
+            }
+
+            @include responsive("laptop") {
+                  grid-template-columns: repeat(4, 1fr);
+            }
+
+            .box {
+                  padding: 2.8rem;
+                  background: var(--clr-card-bg);
+                  width: 100%;
+                  text-align: center;
+                  margin: 3rem 0;
+                  border-radius: 0.5rem;
+                  position: relative;
+                  overflow: hidden;
+                  cursor: pointer;
+                  transition: 250ms ease-in-out;
+
+                  &:hover,
+                  &:focus {
+                        background: var(--clr-hover);
+                        outline: none;
+                  }
+
+                  @include responsive("phone") {
+                        margin: 0;
+                  }
+
+                  &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0.5rem;
+                  }
+
+                  &.facebook {
+                        &::before {
+                              background: var(--clr-facebook_blue);
+                        }
+
+                        .box__header::before {
+                              content: url(../images/icon-facebook.svg);
+                        }
+                  }
+
+                  &.twitter {
+                        &::before {
+                              background: var(--clr-twitter_blue);
+                        }
+
+                        .box__header::before {
+                              content: url(../images/icon-twitter.svg);
+                        }
+                  }
+
+                  &.instagram {
+                        &::before {
+                              background: linear-gradient(
+                                    to right,
+                                    var(--clr-instagram_orange),
+                                    var(--clr-instagram_pink)
+                              );
+                        }
+
+                        .box__header::before {
+                              content: url(../images/icon-instagram.svg);
+                        }
+                  }
+
+                  &.youtube {
+                        &::before {
+                              background: var(--clr-youtube_red);
+                        }
+
+                        .box__header::before {
+                              content: url(../images/icon-youtube.svg);
+                        }
+                  }
+
+                  &__header {
+                        &::before {
+                              position: relative;
+                              bottom: -0.5rem;
+                              right: 0.5rem;
+                        }
+                  }
+
+                  &__number {
+                        font-size: 5.2rem;
+                        color: var(--clr-text-1);
+                        margin-top: 3.2rem;
+                  }
+
+                  &__followers {
+                        text-transform: uppercase;
+                        letter-spacing: 0.2rem;
+                        font-weight: normal;
+                        color: var(--clr-text-2);
+                        margin-bottom: 3.2rem;
+                  }
+
+                  &__today {
+                        font-size: 1.2rem;
+                        color: var(--clr-lime_green);
+
+                        &::before {
+                              content: url(../images/icon-up.svg);
+                              display: inline-flex;
+                              position: relative;
+                              bottom: 0.2rem;
+                              right: 0.2rem;
+                        }
+
+                        &--red {
+                              color: var(--clr-bright_red);
+
+                              &::before {
+                                    content: url(../images/icon-down.svg);
+                              }
+                        }
+                  }
+            }
+      }
+
+      .bottom {
+            h2 {
+                  color: var(--clr-text-1);
+                  margin: 3rem 0 2rem 0;
+            }
+
+            .items-container {
+                  display: grid;
+                  grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(24.8rem, 1fr)
+                  );
+                  gap: 1rem;
+
+                  @include responsive("phone") {
+                        gap: 3rem;
+                  }
+
+                  .item {
+                        @include flex(space-around, none);
+                        flex-direction: column;
+                        padding: 2.5rem 2.5rem;
+                        background: var(--clr-card-bg);
+                        width: 100%;
+                        margin: 1rem 0;
+                        border-radius: 0.5rem;
+                        position: relative;
+                        overflow: hidden;
+                        cursor: pointer;
+                        transition: 250ms ease-in-out;
+
+                        &:hover,
+                        &:focus {
+                              background: var(--clr-hover);
+                              outline: none;
+                        }
+
+                        &__title {
+                              @include flex(space-between, center);
+                              margin-bottom: 1.5rem;
+                        }
+
+                        &__stats {
+                              @include flex(space-between, flex-end);
+
+                              .stats_number {
+                                    font-size: 3.2rem;
+                                    font-weight: bold;
+                                    color: var(--clr-text-1);
+                              }
+
+                              .stats_percent {
+                                    font-size: 1.2rem;
+                                    color: var(--clr-lime_green);
+
+                                    &::before {
+                                          display: inline-flex;
+                                          position: relative;
+                                          bottom: 0.2rem;
+                                          right: 0.2rem;
+                                    }
+
+                                    &--red {
+                                          color: var(--clr-bright_red);
+
+                                          &::before {
+                                                content: url(../images/icon-down.svg);
+                                          }
+                                    }
+
+                                    &--green {
+                                          color: var(--clr-lime_green);
+
+                                          &::before {
+                                                content: url(../images/icon-up.svg);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+}
