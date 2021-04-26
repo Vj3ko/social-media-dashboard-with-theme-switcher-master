@@ -291,7 +291,7 @@ p {
                   }
 
                   .item {
-                        @include flex(space-around, none);
+                        @include flex(space-around, normal);
                         flex-direction: column;
                         padding: 2.5rem 2.5rem;
                         background: var(--clr-card-bg);
